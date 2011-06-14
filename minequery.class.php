@@ -1,6 +1,6 @@
 <?php
 /*
- * Minequery PHP
+ * Minequery PHP - NightCraft Ed.
  * Copyright (C) 2011 Kramer Campbell
  *
  * This program is free software: you can redistribute it and/or modify
@@ -57,18 +57,38 @@ class Minequery {
 		// Server port
 		$query['serverPort'] = explode(" ", $response[0], 2);
 		$query['serverPort'] = $query['serverPort'][1];
+		
+		//Server Version
+		$query['SVER'] = explode(" ", $response[1], 2);
+		$query['SVER'] = $query['SVER'][1];
 
+		//Client Version
+		$query['CVER'] = explode(" ", $response[2], 2);
+		$query['CVER'] = $query['CVER'][1];
+		
 		// Player count
-		$query['playerCount'] = explode(" ", $response[1], 2);
+		$query['playerCount'] = explode(" ", $response[3], 2);
 		$query['playerCount'] = $query['playerCount'][1];
 
 		// Max players
-		$query['maxPlayers'] = explode(" ", $response[2], 2);
+		$query['maxPlayers'] = explode(" ", $response[4], 2);
 		$query['maxPlayers'] = $query['maxPlayers'][1];
 
 		// Player list
-		$query['playerList'] = explode(" ", $response[3], 2);
-		$query['playerList'] = explode(", ", trim($query['playerList'][1], "[]"));
+		$query['PLAYERWORLDLIST'] = explode(" ", $response[6], 2);
+		$query['PLAYERWORLDLIST'] = explode(", ", trim($query['PLAYERWORLDLIST'][1], "[]"));
+		
+		// Player list
+		$query['playerList'] = explode(" ", $response[5], 2);
+		$query['playerList'] = explode(", ", trim($query['playerList'][1], "[]"));		
+
+		// Plugin list
+		$query['PLUGINNAMELIST'] = explode(" ", $response[7], 2);
+		$query['PLUGINNAMELIST'] = explode(", ", trim($query['PLUGINNAMELIST'][1], "[]"));
+
+		// Plugin version list
+		$query['PLUGINVERSIONLIST'] = explode(" ", $response[8], 2);
+		$query['PLUGINVERSIONLIST'] = explode(", ", trim($query['PLUGINVERSIONLIST'][1], "[]"));
 
 		$query['latency'] = ($end_time - $beginning_time) * 1000;
 
